@@ -23,7 +23,7 @@ public class Main {
 	static Integer port = 8184;
 	static Integer serverPort = 8183;
 	static String filePath = "";
-	static File[] listOfCachedFiles = null;
+	static ArrayList<File> listOfCachedFiles = new ArrayList<File>();
 	static ArrayList<String> ServerList = new ArrayList<String>();
 	final static Logger logger = Logger.getLogger(Main.class.getName());
 	static FileHandler fh = null; 
@@ -31,7 +31,10 @@ public class Main {
 	public static void main(String[] args) throws Exception {  		
 		getProperties(args[0]);
 		File folder = new File(filePath);
-    	listOfCachedFiles = folder.listFiles();
+		for(File file : folder.listFiles())
+		{
+			listOfCachedFiles.add(file);
+		}
     	
     	//Set up log
     	try{

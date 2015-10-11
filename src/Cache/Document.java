@@ -8,12 +8,9 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.restlet.Client;
-import org.restlet.Context;
 import org.restlet.Request;
 import org.restlet.data.Form;
 import org.restlet.data.MediaType;
-import org.restlet.data.Protocol;
 import org.restlet.representation.FileRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
@@ -33,9 +30,9 @@ public class Document extends ServerResource {
 		{
 			fileName += form.getValues("fileName");
 		}
-		for (int i = 0; i<Main.listOfCachedFiles.length; i++)
+		for (int i = 0; i<Main.listOfCachedFiles.size(); i++)
     	{
-    		if((Main.filePath+"/"+fileName).equals(Main.listOfCachedFiles[i].toString()))
+    		if((Main.filePath+"/"+fileName).equals(Main.listOfCachedFiles.get(i).getName().toString()))
     		{
     			logger.log(Level.INFO, "user request: file " + fileName + " at " + Main.getDate() 
     			+ System.lineSeparator() + "response: cached file " + fileName);  			
@@ -58,7 +55,8 @@ public class Document extends ServerResource {
 		 fileInput.close();
 		 fileOut.flush();
 		 fileOut.close();
-		result = new FileRepresentation(Main.filePath + "//" + fileName, MediaType.TEXT_HTML);
-		return result;
+		 Main.listOfCachedFiles.add(new File(Main.filePath+"/"+fileName));
+		 result = new FileRepresentation(Main.filePath + "//" + fileName, MediaType.TEXT_HTML);
+		 return result;
     }
 }
