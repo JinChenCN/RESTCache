@@ -17,6 +17,9 @@ public class APISever extends Application {
         // Defines routes
         router.attach("/files", FileList.class);
         router.attach("/file", Document.class);
+        router.attach("/log", Log.class);
+        router.attach("/cachedFiles", CachedFiles.class);
+        router.attach("/DeleteCachedfile", DeleteCachedfile.class);
 
         return router;
     }

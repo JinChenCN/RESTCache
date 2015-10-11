@@ -6,10 +6,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,8 +21,6 @@ public class Main {
 	static String filePath = "";
 	static ArrayList<File> listOfCachedFiles = new ArrayList<File>();
 	static ArrayList<String> ServerList = new ArrayList<String>();
-	final static Logger logger = Logger.getLogger(Main.class.getName());
-	static FileHandler fh = null; 
 	
 	public static void main(String[] args) throws Exception {  		
 		getProperties(args[0]);
@@ -35,18 +29,7 @@ public class Main {
 		{
 			listOfCachedFiles.add(file);
 		}
-    	
-    	//Set up log
-    	try{
-    	 fh = new FileHandler(filePath + "//fileLog.log", false);
-    	}catch(SecurityException | IOException e){
-    		e.printStackTrace();
-    	}   	
-    	Logger fileLog = Logger.getLogger("");
-    	fh.setFormatter(new SimpleFormatter());
-    	fileLog.addHandler(fh);
-    	fileLog.setLevel(Level.INFO);
-    	
+			
     	getFileList();
     	
 	    // Create a new Component.  
