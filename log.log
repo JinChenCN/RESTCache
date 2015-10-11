@@ -1,0 +1,6 @@
+user request: file test1.txt at 22:03:50 2015-10-11
+response: cached file test1.txt
+
+user request: file test2.txt at 22:03:57 2015-10-11
+response: file test2.txt downloaded from the server
+

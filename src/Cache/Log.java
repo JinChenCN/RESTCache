@@ -9,7 +9,7 @@ public class Log  extends ServerResource{
 	@Get
     public FileRepresentation getResource() {
 		FileRepresentation result = null;
-		result = new FileRepresentation("fileLog.log", MediaType.TEXT_HTML);
+		result = new FileRepresentation(Main.logName, MediaType.TEXT_HTML);
 		return result;
 	}
 }

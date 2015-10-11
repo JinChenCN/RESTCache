@@ -2,7 +2,9 @@ package Cache;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -21,6 +23,7 @@ public class Main {
 	static String filePath = "";
 	static ArrayList<File> listOfCachedFiles = new ArrayList<File>();
 	static ArrayList<String> ServerList = new ArrayList<String>();
+    static File logName = new File("log.log");
 	
 	public static void main(String[] args) throws Exception {  		
 		getProperties(args[0]);
@@ -31,6 +34,13 @@ public class Main {
 		}
 			
     	getFileList();
+    	
+    	// Initiate log
+    	FileWriter writer = new FileWriter(logName, false);
+    	PrintWriter printWriter = new PrintWriter(writer, false);
+    	printWriter.flush();
+    	printWriter.close();
+    	writer.close();
     	
 	    // Create a new Component.  
 	    Component component = new Component(); 

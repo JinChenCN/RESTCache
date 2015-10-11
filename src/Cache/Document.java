@@ -5,10 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
+import java.io.RandomAccessFile;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.restlet.Request;
 import org.restlet.data.Form;
 import org.restlet.data.MediaType;
@@ -20,25 +19,12 @@ import org.restlet.resource.ServerResource;
 
 public class Document extends ServerResource {
 	String fileName = "";
-	Logger logger = Logger.getLogger("MyLog");
-	FileHandler fh;
 	
 	@Get
     public FileRepresentation getResource() throws IOException {
 		FileRepresentation result = null;
 		Request request = getRequest();
-		Form form = request.getResourceRef().getQueryAsForm();
-		
-		//Set up log
-		try{
-			 fh = new FileHandler("fileLog.log");
-			}catch(SecurityException | IOException e){
-				e.printStackTrace();
-			}   	
-		fh.setFormatter(new SimpleFormatter());
-		logger.addHandler(fh);
-		logger.setLevel(Level.INFO);
-		logger.setUseParentHandlers(false);
+		Form form = request.getResourceRef().getQueryAsForm();		
 		
 		if(form.getValues("fileName") != null)
 		{
@@ -46,17 +32,15 @@ public class Document extends ServerResource {
 		}
 		for (int i = 0; i<Main.listOfCachedFiles.size(); i++)
     	{
-    		if((Main.filePath+"/"+fileName).equals(Main.listOfCachedFiles.get(i).getName().toString()))
+    		if(fileName.equals(Main.listOfCachedFiles.get(i).getName()))
     		{
-    			Logger.getLogger("MyLog").info("user request: file " + fileName + " at " + Main.getDate() 
-    			+ System.lineSeparator() + "response: cached file " + fileName);  			
+    			writeLog(fileName, "cached file " + fileName);   					
     			return new FileRepresentation(Main.filePath + "//" + fileName, MediaType.TEXT_HTML);
     		} 
     	}
 
 		ClientResource file = new ClientResource("http://localhost:" + Main.serverPort + "/api/file?filename="+fileName);
-		Logger.getLogger("MyLog").info("user request: file " + fileName + " at " + Main.getDate() 
-		+ System.lineSeparator() + "response:file " + fileName + " downloaded from the server"); 
+		writeLog(fileName, "file " + fileName + " downloaded from the server");  
 		Representation response = file.get();
 		InputStream fileInput = response.getStream();
 		OutputStream fileOut = new FileOutputStream(new File(Main.filePath+"/"+fileName));
@@ -72,5 +56,38 @@ public class Document extends ServerResource {
 		 Main.listOfCachedFiles.add(new File(Main.filePath+"/"+fileName));
 		 result = new FileRepresentation(Main.filePath + "//" + fileName, MediaType.TEXT_HTML);
 		 return result;
+    }
+	
+	public void writeLog(String fineName, String info){
+        String content=info(fineName,info);
+        RandomAccessFile mm = null;
+        FileOutputStream o = null;
+        try {
+            o = new FileOutputStream(Main.logName,true);
+            o.write(content.getBytes("utf-8"));
+            o.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (mm != null) {
+                try {
+                    mm.close(); 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                 
+            }
+        }
+    }  
+ 
+    public String info(String fineName, String info){
+         StringBuffer buffer=new StringBuffer();
+         Date date = new Date();   
+         SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss yyyy-MM-dd");   
+         String d = sd.format(date)+"\r\n";  
+         buffer.append("user request: file "+ fineName +" at "+ d);
+         buffer.append("response: ").append(info).append("\r\n");
+         buffer.append("\r\n");
+         return buffer.toString();
     }
 }
