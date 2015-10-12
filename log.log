@@ -1,6 +1,6 @@
-user request: file test1.txt at 22:03:50 2015-10-11
-response: cached file test1.txt
+user request: file test3.html at 13:42:56 2015-10-12
+response: cached file test3.html
 
-user request: file test2.txt at 22:03:57 2015-10-11
+user request: file test2.txt at 13:44:23 2015-10-12
 response: file test2.txt downloaded from the server
 
