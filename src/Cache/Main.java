@@ -27,13 +27,14 @@ public class Main {
 	
 	public static void main(String[] args) throws Exception {  		
 		getProperties(args[0]);
-		File folder = new File(filePath);
-		for(File file : folder.listFiles())
+		// Initiate cached Files
+		File cachedFilefolder = new File(filePath);
+		for(File cachedfile : cachedFilefolder.listFiles())
 		{
-			listOfCachedFiles.add(file);
+			cachedfile.delete();   
 		}
 			
-    	getFileList();
+    	getFileList();   	
     	
     	// Initiate log
     	FileWriter writer = new FileWriter(logName, false);

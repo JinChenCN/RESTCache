@@ -1,9 +1,0 @@
-user request: file test3.html at 18:04:44 2015-10-17
-response: file test3.html downloaded from the server
-
-user request: file 2015-02.JPG at 18:05:05 2015-10-17
-response: file 2015-02.JPG downloaded from the server
-
-user request: file test3.html at 18:06:08 2015-10-17
-response: cached file test3.html
-
