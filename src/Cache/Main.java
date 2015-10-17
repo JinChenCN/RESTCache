@@ -18,8 +18,8 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
 public class Main {
-	static Integer port = 8184;
-	static Integer serverPort = 8183;
+	static Integer port = 8084;
+	static Integer serverPort = 8083;
 	static String filePath = "";
 	static ArrayList<File> listOfCachedFiles = new ArrayList<File>();
 	static ArrayList<String> ServerList = new ArrayList<String>();
