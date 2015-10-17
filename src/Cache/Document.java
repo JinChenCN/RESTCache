@@ -80,12 +80,12 @@ public class Document extends ServerResource {
         }
     }  
  
-    public String info(String fineName, String info){
+    public String info(String fileName, String info){
          StringBuffer buffer=new StringBuffer();
          Date date = new Date();   
          SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss yyyy-MM-dd");   
          String d = sd.format(date)+System.getProperty("line.separator");  
-         buffer.append("<br>user request: file "+ fineName +" at "+ d+System.getProperty("line.separator"));
+         buffer.append("<br>user request: file "+ fileName +" at "+ d+System.getProperty("line.separator"));
          buffer.append("response: ").append(info).append(System.getProperty("line.separator"));
          buffer.append("<br>");
          return buffer.toString();
