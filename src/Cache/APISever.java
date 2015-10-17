@@ -19,6 +19,7 @@ public class APISever extends Application {
         router.attach("/file", Document.class);
         router.attach("/log", Log.class);
         router.attach("/cache", CachedFiles.class);
+        router.attach("/clearCache", ClearCache.class);
 
         return router;
     }
