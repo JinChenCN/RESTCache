@@ -20,7 +20,7 @@ import org.restlet.resource.ClientResource;
 public class Main {
 	static Integer port = 8084;
 	static Integer serverPort = 8083;
-	static String filePath = "";
+	static String filePath = "711CacheTestFolder";
 	static ArrayList<File> listOfCachedFiles = new ArrayList<File>();
 	static ArrayList<String> ServerList = new ArrayList<String>();
     static File logName = new File("log.log");
@@ -29,6 +29,13 @@ public class Main {
 		getProperties(args[0]);
 		// Initiate cached Files
 		File cachedFilefolder = new File(filePath);
+		try {
+			   if (!(cachedFilefolder.isDirectory())) {
+			    new File(filePath).mkdir();
+			   }
+			  } catch (SecurityException e) {
+			   e.printStackTrace();
+			  }
 		if(cachedFilefolder.listFiles()!=null)
 		{
 			for(File cachedfile : cachedFilefolder.listFiles())
@@ -72,7 +79,6 @@ public class Main {
 			file.close();
 			port = Integer.parseInt(configFile.getProperty("CachePort"));
 			serverPort = Integer.parseInt(configFile.getProperty("ServerPort"));
-			filePath = configFile.getProperty("CacheFilePath");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
