@@ -13,6 +13,7 @@ public class ClearCache extends ServerResource{
 		StringRepresentation result = null;
 		if(Delete(Main.filePath))
 		{
+			Main.listOfCachedFiles.clear();
 			result = new StringRepresentation("All cached files have been cleared!");
 		}else
 		{
