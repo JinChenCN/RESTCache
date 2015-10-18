@@ -1,17 +1,7 @@
-<br>user request: file .DS_Store at 10:31:17 2015-10-18
-response: file .DS_Store downloaded from the server
-<br><br>user request: file 2015-02.JPG at 10:31:19 2015-10-18
+<br>user request: file test1.txt at 13:34:14 2015-10-18
+
+response: file test1.txt downloaded from the server
+<br><br>user request: file 2015-02.JPG at 13:34:20 2015-10-18
+
 response: file 2015-02.JPG downloaded from the server
-<br><br>user request: file test1.txt at 10:31:21 2015-10-18
-response: file test1.txt downloaded from the server
-<br><br>user request: file test3.html at 10:31:23 2015-10-18
-response: file test3.html downloaded from the server
-<br><br>user request: file test1.txt at 10:31:26 2015-10-18
-response: cached file test1.txt
-<br><br>user request: file test1.txt at 10:32:06 2015-10-18
-response: file test1.txt downloaded from the server
-<br><br>user request: file test2.txt at 10:32:10 2015-10-18
-response: file test2.txt downloaded from the server
-<br><br>user request: file test4.txt at 10:32:13 2015-10-18
-response: file test4.txt downloaded from the server
 <br>

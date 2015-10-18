@@ -42,6 +42,7 @@ public class Document extends ServerResource {
 		ClientResource file = new ClientResource("http://localhost:" + Main.serverPort + "/api/file?filename="+fileName);
 		writeLog(fileName, "file " + fileName + " downloaded from the server");  
 		Representation response = file.get();
+		MediaType fileType = response.getMediaType();
 		InputStream fileInput = response.getStream();
 		OutputStream fileOut = new FileOutputStream(new File(Main.filePath+"/"+fileName));
 		int read = 0;
@@ -54,7 +55,7 @@ public class Document extends ServerResource {
 		 fileOut.flush();
 		 fileOut.close();
 		 Main.listOfCachedFiles.add(new File(Main.filePath+"/"+fileName));
-		 result = new FileRepresentation(Main.filePath + "//" + fileName, MediaType.TEXT_HTML);
+		 result = new FileRepresentation(Main.filePath + "//" + fileName, fileType);
 		 return result;
     }
 	
