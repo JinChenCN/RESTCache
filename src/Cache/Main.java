@@ -29,9 +29,12 @@ public class Main {
 		getProperties(args[0]);
 		// Initiate cached Files
 		File cachedFilefolder = new File(filePath);
-		for(File cachedfile : cachedFilefolder.listFiles())
+		if(cachedFilefolder.listFiles()!=null)
 		{
-			cachedfile.delete();   
+			for(File cachedfile : cachedFilefolder.listFiles())
+			{
+				cachedfile.delete();   
+			}
 		}
 			
     	getFileList();   	
